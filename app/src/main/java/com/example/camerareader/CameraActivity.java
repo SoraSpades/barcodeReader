@@ -35,6 +35,7 @@ public class CameraActivity extends AppCompatActivity {
         surfaceView = findViewById(R.id.surface_view);
         barcodeText = findViewById(R.id.barcode_text);
 
+        initialize();
     }
 
     private void initialize() {
@@ -72,21 +73,15 @@ public class CameraActivity extends AppCompatActivity {
 
         barDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
-            public void release() {
-                // Toast.makeText(getApplicationContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
-            }
+            public void release() {}
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
-
-
                     barcodeText.post(new Runnable() {
-
                         @Override
                         public void run() {
-
                             if (barcodes.valueAt(0).email != null) {
                                 barcodeText.removeCallbacks(null);
                                 barcodeData = barcodes.valueAt(0).email.address;
@@ -96,10 +91,8 @@ public class CameraActivity extends AppCompatActivity {
                             barcodeText.setText(barcodeData);
                         }
                     });
-
                 }
             }
         });
-
     }
 }
