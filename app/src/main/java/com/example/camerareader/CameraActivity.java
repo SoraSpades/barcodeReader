@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -21,7 +22,6 @@ import java.io.IOException;
 public class CameraActivity extends AppCompatActivity {
 
     private final static int REQUEST_CAMERA_PERMISSION = 201;
-    private BarcodeDetector barDetector;
     private CameraSource cameraSrc;
     private SurfaceView surfaceView;
     private TextView barcodeText;
@@ -39,7 +39,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        barDetector = new BarcodeDetector.Builder(this)
+        BarcodeDetector barDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
         cameraSrc = new CameraSource.Builder(this, barDetector)
@@ -88,11 +88,24 @@ public class CameraActivity extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                             }
-                            barcodeText.setText(barcodeData);
+                            processCode(barcodeData);
                         }
                     });
                 }
             }
         });
     }
+
+    /**
+     * Funtion to test if the code is valid and launch an activity to request data
+     * @param codeData Final data of the barcode
+     */
+    private void processCode(String codeData) {
+        boolean codeValid = true; // TODO
+
+        if (codeValid) {
+            startActivity(new Intent(this, RequestActivity.class));
+        }
+    }
+
 }
