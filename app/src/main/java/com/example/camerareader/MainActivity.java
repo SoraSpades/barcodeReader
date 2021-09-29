@@ -21,10 +21,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void launch_camera(View view) {
-        Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+        findViewById(R.id.launch_camera_button).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(MainActivity.this, CameraActivity.class));
+                    }
+                }
+        );
     }
 }
