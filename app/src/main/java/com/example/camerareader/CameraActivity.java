@@ -26,6 +26,7 @@ public class CameraActivity extends AppCompatActivity {
     private SurfaceView surfaceView;
     private TextView barcodeText;
     private String barcodeData;
+    private boolean scanned = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,10 @@ public class CameraActivity extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                             }
-                            processCode(barcodeData);
+                            if (!scanned) {
+                                processCode(barcodeData);
+                                scanned = true;
+                            }
                         }
                     });
                 }
