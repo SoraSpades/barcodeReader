@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CameraReader</string>
+    <string name="launch_camera_button_text">Launch Camera</string>
+</resources>
