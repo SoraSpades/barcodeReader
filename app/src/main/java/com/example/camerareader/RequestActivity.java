@@ -11,7 +11,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class RequestActivity extends AppCompatActivity {
-    public final static String urlBase = "";
+    public final static String URLBASE = "http://192.168.1.128:3000/query?id=";
+    public final static String BARCODE_EXTRA = "BARCODE_EXTRA";
 
     private TextView responseView;
 
@@ -21,14 +22,15 @@ public class RequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request);
 
         responseView = findViewById(R.id.request_activity_body);
-        makeRequest("https://api.coindesk.com/v1/bpi/currentprice.json", Request.Method.GET);
+        String barcodeData = getIntent().getStringExtra(BARCODE_EXTRA);
+        makeRequest(URLBASE + barcodeData, Request.Method.GET);
     }
 
     private void makeRequest(String url, int method) {
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(method, url,
                 response -> responseView.setText(response),
-                error -> responseView.setText(R.string.request_error_message));
+                error -> responseView.setText(error.toString() ));
 
         queue.add(stringRequest);
     }
