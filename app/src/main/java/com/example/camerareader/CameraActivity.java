@@ -7,6 +7,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -27,6 +28,12 @@ public class CameraActivity extends AppCompatActivity {
     private TextView barcodeText;
     private String barcodeData;
     private boolean scanned = false;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scanned = false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,7 @@ public class CameraActivity extends AppCompatActivity {
                             }
                             if (!scanned) {
                                 processCode(barcodeData);
+                                Log.d("Code read", barcodeData);
                                 scanned = true;
                             }
                         }
@@ -108,7 +116,9 @@ public class CameraActivity extends AppCompatActivity {
         boolean codeValid = true; // TODO
 
         if (codeValid) {
-            startActivity(new Intent(this, RequestActivity.class));
+            Intent intent = new Intent(this, RequestActivity.class);
+            intent.putExtra(RequestActivity.BARCODE_EXTRA, codeData);
+            startActivity(intent);
         }
     }
 
