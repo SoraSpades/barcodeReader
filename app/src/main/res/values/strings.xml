@@ -3,4 +3,6 @@
     <string name="launch_camera_button_text">Launch Camera</string>
     <string name="response_title_text">Response</string>
     <string name="request_error_message">Error getting the data</string>
+    <string name="product_image_description">Product Image</string>
+    <string name="placeholder_text">Placeholder Text</string>
 </resources>
