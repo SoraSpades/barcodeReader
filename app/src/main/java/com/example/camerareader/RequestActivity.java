@@ -42,10 +42,10 @@ public class RequestActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET, URLBASE + QUERYSUFFIX + barcode,
                 response -> {// Response callback
-                    responseView.setText(response);
+                    responseView.setText(response); // TODO: Format Data Display
                     try {
-                        JSONObject jsonOb = new JSONObject(response);
-                        makeImageRequest(jsonOb.getString("image"));
+                        Product product = new Product(new JSONObject(response));
+                        makeImageRequest(product.getImg());
                     } catch (JSONException e) {
                         Log.d("Error parsing JSON", e.toString());
                     }
