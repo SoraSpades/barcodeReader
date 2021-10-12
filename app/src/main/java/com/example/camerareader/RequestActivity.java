@@ -28,6 +28,7 @@ public class RequestActivity extends AppCompatActivity {
     private TextView responseView;
     private ImageView imageView;
     private Requester requester;
+    private Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,25 +45,22 @@ public class RequestActivity extends AppCompatActivity {
         CompletableFuture<String> future = requester.requestString(URLBASE + QUERYSUFFIX + barcodeData);
         future.thenRun(()->{
             try {
-                String response = future.get();
+                String response = future.get(); // SERVER RESPONSE TODO: Parse data
+                product = new Product(new JSONObject(response));
                 responseView.setText(response);
+                CompletableFuture<Bitmap> imgFuture = requester.requestBitmap(URLBASE + product.getImgPath());
+                imgFuture.thenRun(()->{
+                    try {
+                        Bitmap image = imgFuture.get();
+                        product.setImgBitmap(image);
+                        imageView.setImageBitmap(image);
+                    } catch (Exception e) {
+                        Log.d("IMG_RESPONSE", "Exception: " + e.toString());
+                    }
+                });
             } catch (Exception e) {
                 Log.d("RESPONSE", "Exception: " + e.toString());
             }
         });
     }
-
-//    private void makeImageRequest(String image) {
-//        ImageRequest imageRequest = new ImageRequest(
-//                URLBASE + image,
-//                response -> { // Callback
-//                    imageView.setImageBitmap(response);
-//                },
-//                0, 0, // Image dimensions
-//                ImageView.ScaleType.CENTER_CROP, // Align type
-//                Bitmap.Config.RGB_565, // Color space
-//                error -> Log.d("Error in Image Request", error.toString()) // Error callback
-//        );
-//        queue.add(imageRequest);
-//    }
 }

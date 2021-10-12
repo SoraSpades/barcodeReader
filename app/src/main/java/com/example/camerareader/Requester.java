@@ -11,20 +11,14 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 public class Requester {
 
     private final RequestQueue queue;
-    private final Context context;
 
     public Requester(Context context) {
-        this.context = context;
-        queue = Volley.newRequestQueue(this.context);
+        queue = Volley.newRequestQueue(context);
     }
 
     public CompletableFuture<String> requestString(String url) {
@@ -33,14 +27,25 @@ public class Requester {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET,
                 url,
-                response -> {
-                    Log.d("RESPONSE", response);
-                    future.complete(response);
-                },
-//                future::complete, // response -> future.complete(response)
+                future::complete, // response -> future.complete(response)
                 error -> future.cancel(true) // Error callback
         );
         queue.add(stringRequest);
+        return future;
+    }
+
+    public CompletableFuture<Bitmap> requestBitmap(String url) {
+        CompletableFuture<Bitmap> future = new CompletableFuture<>();
+        Log.d("REQUEST", "Requesting to " + url);
+        ImageRequest imageRequest = new ImageRequest(
+                url,
+                future::complete, // Complete callback
+                -1, 0, // Image dimensions
+                ImageView.ScaleType.CENTER_CROP, // Align type
+                Bitmap.Config.RGB_565, // Color space
+                error -> future.cancel(true) // Cancel callback
+        );
+        queue.add(imageRequest);
         return future;
     }
 }
