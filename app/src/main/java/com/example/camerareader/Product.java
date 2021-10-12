@@ -13,7 +13,7 @@ public class Product {
     private final double price;
     private final String imgPath;
     private Bitmap imgBitmap;
-    private final int quantity;
+    // private final int quantity;
 
     /**
      * Constructor of the class Product
@@ -21,11 +21,11 @@ public class Product {
      * @throws JSONException Exception thrown when the object is incorrect
      */
     public Product(@NonNull JSONObject product) throws JSONException{
-        _id = product.getString("_id");
+        _id = product.getString("id");
         name = product.getString("name");
         price = product.getDouble("price");
-        imgPath = product.getString("img");
-        quantity = product.getInt("quantity");
+        imgPath = product.getString("image");
+        // quantity = product.getInt("quantity");
     }
 
     /**
@@ -64,9 +64,9 @@ public class Product {
      * Get product quantity
      * @return Int - Product Quantity
      */
-    public int getQuantity() {
-        return quantity;
-    }
+//    public int getQuantity() {
+//        return quantity;
+//    }
 
     /**
      * Get Image as Bitmap
