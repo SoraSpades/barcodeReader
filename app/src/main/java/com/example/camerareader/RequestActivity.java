@@ -45,7 +45,7 @@ public class RequestActivity extends AppCompatActivity {
                     responseView.setText(response); // TODO: Format Data Display
                     try {
                         Product product = new Product(new JSONObject(response));
-                        makeImageRequest(product.getImg());
+                        makeImageRequest(product.getImgPath());
                     } catch (JSONException e) {
                         Log.d("Error parsing JSON", e.toString());
                     }

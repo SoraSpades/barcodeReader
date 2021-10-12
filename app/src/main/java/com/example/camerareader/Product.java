@@ -1,5 +1,7 @@
 package com.example.camerareader;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 
 import org.json.JSONException;
@@ -9,7 +11,8 @@ public class Product {
     private final String _id;
     private final String name;
     private final double price;
-    private final String img;
+    private final String imgPath;
+    private Bitmap imgBitmap;
     private final int quantity;
 
     /**
@@ -21,7 +24,7 @@ public class Product {
         _id = product.getString("_id");
         name = product.getString("name");
         price = product.getDouble("price");
-        img = product.getString("img");
+        imgPath = product.getString("img");
         quantity = product.getInt("quantity");
     }
 
@@ -53,8 +56,8 @@ public class Product {
      * Get product image path
      * @return String - Path to the img
      */
-    public String getImg() {
-        return img;
+    public String getImgPath() {
+        return imgPath;
     }
 
     /**
@@ -63,5 +66,21 @@ public class Product {
      */
     public int getQuantity() {
         return quantity;
+    }
+
+    /**
+     * Get Image as Bitmap
+     * @return Bitmap - Image Bitmap
+     */
+    public Bitmap getImgBitmap() {
+        return imgBitmap;
+    }
+
+    /**
+     * Set ImgBitmap
+     * @param imgBitmap Bitmap - Image to set
+     */
+    public void setImgBitmap(Bitmap imgBitmap) {
+        this.imgBitmap = imgBitmap;
     }
 }
