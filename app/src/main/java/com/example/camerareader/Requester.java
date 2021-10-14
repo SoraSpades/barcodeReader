@@ -40,7 +40,7 @@ public class Requester {
         ImageRequest imageRequest = new ImageRequest(
                 url,
                 future::complete, // Complete callback
-                -1, 0, // Image dimensions
+                1000, 1000, // Image dimensions
                 ImageView.ScaleType.CENTER_CROP, // Align type
                 Bitmap.Config.RGB_565, // Color space
                 error -> future.cancel(true) // Cancel callback
