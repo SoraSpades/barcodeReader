@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="background" type="color"/>
-    <item name="textColor" type="color" />
-    <item name="buttonTextColor" type="color" />
+    <attr name="background" format="reference"/>
+    <attr name="textColor" format="reference" />
+    <attr name="buttonTextColor" format="reference" />
+    <attr name="isLightTheme" format="boolean" />
 </resources>
