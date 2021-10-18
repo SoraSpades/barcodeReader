@@ -2,15 +2,27 @@
     <!-- Base application theme. -->
     <style name="Theme.CameraReader" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/core_green</item>
+        <item name="colorPrimaryVariant">@color/core_green</item>
+        <item name="colorOnPrimary">@color/core_white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="buttonTextColor">@color/core_white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/background</item>
+    </style>
+
+    <style name="LightTheme" parent="Theme.CameraReader">
+        <item name="background">@color/core_white</item>
+        <item name="textColor">@color/core_black</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/background</item>
+    </style>
+    <style name="DarkTheme" parent="Theme.CameraReader">
+        <item name="background">@color/core_black</item>
+        <item name="textColor">@color/core_white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/background</item>
     </style>
 </resources>
