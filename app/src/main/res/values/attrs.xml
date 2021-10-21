@@ -3,5 +3,5 @@
     <attr name="background" format="reference"/>
     <attr name="textColor" format="reference" />
     <attr name="buttonTextColor" format="reference" />
-    <attr name="isLightTheme" format="boolean" />
+    <attr name="complementary" format="reference" />
 </resources>

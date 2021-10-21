@@ -65,7 +65,8 @@
         android:layout_weight="1"
         android:layout_margin="2.5dp"
         android:backgroundTint="?attr/complementary"
-        android:text="<" />
+        android:textColor="?attr/background"
+        android:text="⤆" />
 
     <Button
         android:id="@+id/button4"
