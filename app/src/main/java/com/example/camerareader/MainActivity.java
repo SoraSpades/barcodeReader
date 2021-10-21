@@ -25,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        findViewById(R.id.insertCode_Activity_button).setOnClickListener(view->{
+            startActivity(new Intent(MainActivity.this, insertCode.class));
+        });
     }
 
     public void changeTheme(View view) {
