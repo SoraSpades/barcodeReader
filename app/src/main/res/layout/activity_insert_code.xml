@@ -28,14 +28,14 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/insertCode_EditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:inputType="textPersonName"
             android:text="@string/code_insert_hint" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/insertCode_Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/search_item_code_button" />
