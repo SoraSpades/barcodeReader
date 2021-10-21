@@ -1,10 +1,13 @@
 package com.example.camerareader;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -25,10 +28,13 @@ public class RequestActivity extends AppCompatActivity {
     public final static String QUERYSUFFIX = "query?id=";
     public final static String BARCODE_EXTRA = "BARCODE_EXTRA";
 
-    private TextView responseView;
-    private ImageView imageView;
     private Requester requester;
     private Product product;
+
+    // Display containers
+    private ImageView imageView;
+    private TextView nameTextView, priceTextView, QuantityTextView;
+    private Button backButton, addToListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +42,21 @@ public class RequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request);
 
         // Variable Initialization
-        responseView = findViewById(R.id.request_activity_body);
-        imageView = findViewById(R.id.product_image_view);
+        nameTextView     = findViewById(R.id.titleTextView);
+        priceTextView    = findViewById(R.id.priceTextView);
+        QuantityTextView = findViewById(R.id.quantityTextView);
+        backButton       = findViewById(R.id.backButton);
+        addToListButton  = findViewById(R.id.addtolistButton);
+        imageView        = findViewById(R.id.product_image_view);
+
         String barcodeData = getIntent().getStringExtra(BARCODE_EXTRA);
         requester = new Requester(this);
+
+        // Button Listeners
+        backButton.setOnClickListener((view)->{
+            finish();
+        });
+
 
         // Make Request
         CompletableFuture<String> future = requester.requestString(URLBASE + QUERYSUFFIX + barcodeData);
