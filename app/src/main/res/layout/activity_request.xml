@@ -66,7 +66,7 @@
         android:layout_margin="2.5dp"
         android:backgroundTint="?attr/complementary"
         android:textColor="?attr/background"
-        android:text="⤆" />
+        android:text="@string/left_arrow" />
 
     <Button
         android:id="@+id/button4"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="10"
         android:layout_margin="2.5dp"
-        android:text="Button" />
+        android:text="@string/addtolist_button_text" />
   </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

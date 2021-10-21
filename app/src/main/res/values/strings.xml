@@ -5,4 +5,6 @@
     <string name="request_error_message">Error getting the data</string>
     <string name="product_image_description">Product Image</string>
     <string name="placeholder_text">Placeholder Text</string>
+    <string name="left_arrow">⤆</string>
+    <string name="addtolist_button_text">Añadir a la Lista</string>
 </resources>
