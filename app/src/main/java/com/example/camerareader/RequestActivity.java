@@ -64,7 +64,7 @@ public class RequestActivity extends AppCompatActivity {
             try {
                 String response = future.get(); // SERVER RESPONSE TODO: Parse data
                 product = new Product(new JSONObject(response));
-                responseView.setText(response);
+                display(product);
                 CompletableFuture<Bitmap> imgFuture = requester.requestBitmap(URLBASE + product.getImgPath());
                 imgFuture.thenRun(()->{
                     try {
@@ -79,5 +79,12 @@ public class RequestActivity extends AppCompatActivity {
                 Log.d("RESPONSE", "Exception: " + e.toString());
             }
         });
+    }
+
+    @SuppressLint("SetTextI18n")
+    void display(@NonNull Product p) {
+        nameTextView.setText(p.getName());
+        priceTextView.setText(p.getPrice() + "€");
+        // QuantityTextView.setText(p.getQuantity());
     }
 }
