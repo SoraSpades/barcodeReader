@@ -10,4 +10,7 @@
     <string name="insert_code">Insert Code</string>
     <string name="theme_changer">Theme Changer</string>
     <string name="app_title">CoreFridged</string>
+    <string name="code_insert_hint">Insert Code Here</string>
+    <string name="search_item_code_button">Search Item</string>
+    <string name="insert_code_title">Insert Item Code Below</string>
 </resources>
