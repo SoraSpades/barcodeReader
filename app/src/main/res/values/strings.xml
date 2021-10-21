@@ -7,4 +7,7 @@
     <string name="placeholder_text">Placeholder Text</string>
     <string name="left_arrow">⤆</string>
     <string name="addtolist_button_text">Añadir a la Lista</string>
+    <string name="insert_code">Insert Code</string>
+    <string name="theme_changer">Theme Changer</string>
+    <string name="app_title">CoreFridged</string>
 </resources>
