@@ -13,4 +13,8 @@
     <string name="code_insert_hint">Insert Code Here</string>
     <string name="search_item_code_button">Search Item</string>
     <string name="insert_code_title">Insert Item Code Below</string>
+    <string name="product_list_title">Product List</string>
+    <string name="total_text">Total</string>
+    <string name="money_placeholder">00.00€</string>
+    <string name="product_placeholder">Product 1</string>
 </resources>
