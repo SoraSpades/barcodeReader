@@ -2,15 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activityRequestMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RequestActivity">
+    tools:context=".RequestActivity"
+    tools:visibility="invisible">
 
   <ImageView
       android:id="@+id/product_image_view"
       android:layout_width="match_parent"
       android:layout_height="202dp"
       android:contentDescription="@string/product_image_description"
+      android:visibility="visible"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +26,6 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="16dp"
       android:layout_marginTop="8dp"
-      android:capitalize="words"
       android:text="Name"
       android:textAlignment="textStart"
       android:textSize="48sp"
@@ -55,6 +57,7 @@
       android:layout_width="409dp"
       android:layout_height="0dp"
       android:orientation="horizontal"
+      android:visibility="visible"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
@@ -64,18 +67,18 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_margin="2.5dp"
+        android:layout_weight="1"
         android:backgroundTint="?attr/complementary"
-        android:textColor="?attr/background"
-        android:text="@string/left_arrow" />
+        android:text="@string/left_arrow"
+        android:textColor="?attr/background" />
 
     <Button
         android:id="@+id/addtolistButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
         android:layout_margin="2.5dp"
+        android:layout_weight="10"
         android:text="@string/addtolist_button_text" />
   </LinearLayout>
 

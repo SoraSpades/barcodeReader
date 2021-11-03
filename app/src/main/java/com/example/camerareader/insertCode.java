@@ -1,7 +1,12 @@
 package com.example.camerareader;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,10 +31,21 @@ public class insertCode extends AppCompatActivity {
             if (!code.equals("")) {
                 Intent intent = new Intent(this, RequestActivity.class);
                 intent.putExtra(RequestActivity.BARCODE_EXTRA, code);
-                startActivity(intent);
-            }
+                activityLauncher.launch(intent);            }
         });
     }
 
+    ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode()== Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        setResult(Activity.RESULT_OK, data);
+                        finish();
+                    }
+                }
+            });
 
 }

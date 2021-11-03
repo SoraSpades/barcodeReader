@@ -1,20 +1,23 @@
 package com.example.camerareader;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
     private ProductList pList;
+    public static final String PRODUCT_EXTRA = "ProdExtra";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +28,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.launch_camera_button).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(MainActivity.this, CameraActivity.class));
-                    }
-                }
+                view -> activityLauncher.launch(new Intent(MainActivity.this, CameraActivity.class))
         );
 
-        findViewById(R.id.insertCode_Activity_button).setOnClickListener(view->{
-            startActivity(new Intent(MainActivity.this, insertCode.class));
-        });
+        findViewById(R.id.insertCode_Activity_button).setOnClickListener(view-> activityLauncher.launch(new Intent(MainActivity.this, insertCode.class)));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        refreshListView();
+    }
+
+    private void refreshListView() {
         if (pList.getLength()>0) {
             findViewById(R.id.listLayout).setVisibility(View.VISIBLE);
             String products="", prices="";
@@ -63,4 +63,23 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
     }
+
+    ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode()== Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        try {
+                            pList.addElement(new Product(new JSONObject(data.getStringExtra(PRODUCT_EXTRA))));
+                            refreshListView();
+                        } catch (Exception e) {
+                            Log.e("JSONException", e.toString());
+                        }
+                    }
+                }
+//                    if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                    // Cancelled Request
+//                    }
+            });
 }

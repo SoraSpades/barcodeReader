@@ -2,26 +2,22 @@ package com.example.camerareader;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class RequestActivity extends AppCompatActivity {
     public final static String URLBASE = "https://codebarreaderserver.herokuapp.com/";
@@ -30,11 +26,13 @@ public class RequestActivity extends AppCompatActivity {
 
     private Requester requester;
     private Product product;
+    private String response;
 
     // Display containers
     private ImageView imageView;
     private TextView nameTextView, priceTextView, QuantityTextView;
     private Button backButton, addToListButton;
+    private ConstraintLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +46,20 @@ public class RequestActivity extends AppCompatActivity {
         backButton       = findViewById(R.id.backButton);
         addToListButton  = findViewById(R.id.addtolistButton);
         imageView        = findViewById(R.id.product_image_view);
+        mainLayout       = findViewById(R.id.activityRequestMainLayout);
 
         String barcodeData = getIntent().getStringExtra(BARCODE_EXTRA);
         requester = new Requester(this);
 
         // Button Listeners
         backButton.setOnClickListener((view)->{
+            setResult(Activity.RESULT_CANCELED);
+            finish();
+        });
+        addToListButton.setOnClickListener(view->{
+            Intent intent = new Intent();
+            intent.putExtra(MainActivity.PRODUCT_EXTRA, response);
+            setResult(Activity.RESULT_OK, intent);
             finish();
         });
 
@@ -62,7 +68,7 @@ public class RequestActivity extends AppCompatActivity {
         CompletableFuture<String> future = requester.requestString(URLBASE + QUERYSUFFIX + barcodeData);
         future.thenRun(()->{
             try {
-                String response = future.get(); // SERVER RESPONSE TODO: Parse data
+                response = future.get(); // SERVER RESPONSE TODO: Parse data
                 product = new Product(new JSONObject(response));
                 display(product);
                 CompletableFuture<Bitmap> imgFuture = requester.requestBitmap(URLBASE + product.getImgPath());
@@ -71,6 +77,7 @@ public class RequestActivity extends AppCompatActivity {
                         Bitmap image = imgFuture.get();
                         product.setImgBitmap(image);
                         imageView.setImageBitmap(image);
+                        mainLayout.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         Log.d("IMG_RESPONSE", "Exception: " + e.toString());
                     }
