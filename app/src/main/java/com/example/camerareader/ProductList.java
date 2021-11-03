@@ -67,4 +67,12 @@ public class ProductList {
         for (Product p: lista) total += p.getPrice();
         return total;
     }
+
+    /**
+     * Get the length of the list
+     * @return Length of the list
+     */
+    public int getLength() {
+        return lista.toArray().length;
+    }
 }
