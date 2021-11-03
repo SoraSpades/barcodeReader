@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             findViewById(R.id.listLayout).setVisibility(View.GONE);
         }
+
+        ((TextView)findViewById(R.id.totalListTextView)).setText(pList.calculateTotal() + " €");
     }
 
     public void changeTheme(View view) {
