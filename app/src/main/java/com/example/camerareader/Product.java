@@ -22,7 +22,10 @@ public class Product {
      */
     public Product(@NonNull JSONObject product) throws JSONException{
         _id = product.getString("id");
-        name = product.getString("name");
+
+        String nametmp = product.getString("name");
+        this.name= Character.toUpperCase(nametmp.charAt(0)) + nametmp.substring(1);
+
         price = product.getDouble("price");
         imgPath = product.getString("image");
         // quantity = product.getInt("quantity");
