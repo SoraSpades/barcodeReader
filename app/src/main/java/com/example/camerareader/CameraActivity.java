@@ -118,9 +118,7 @@ public class CameraActivity extends AppCompatActivity {
      * @param codeData Final data of the barcode
      */
     private void processCode(String codeData) {
-        boolean codeValid = true; // TODO
-
-        if (codeValid) {
+        if (Product.validateCode(codeData)) {
             Intent intent = new Intent(this, RequestActivity.class);
             intent.putExtra(RequestActivity.BARCODE_EXTRA, codeData);
             activityLauncher.launch(intent);

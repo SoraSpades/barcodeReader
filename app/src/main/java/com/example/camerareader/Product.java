@@ -97,4 +97,18 @@ public class Product {
     public boolean equals(@Nullable Object obj) {
         return obj instanceof Product && this.name.equals(((Product) obj).getName());
     }
+
+    /**
+     * Validate codes
+     * @param code Code to validate
+     * @return True - Valid Code
+     */
+    public static boolean validateCode(String code) {
+        try {
+            int number = Integer.parseInt(code);
+            return (number > 0);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

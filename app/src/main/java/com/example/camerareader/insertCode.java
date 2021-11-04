@@ -28,7 +28,7 @@ public class insertCode extends AppCompatActivity {
 
         sendCodeButton.setOnClickListener((view) -> {
             String code = codeEditText.getText().toString();
-            if (!code.equals("")) {
+            if (!code.equals("") && Product.validateCode(code)) {
                 Intent intent = new Intent(this, RequestActivity.class);
                 intent.putExtra(RequestActivity.BARCODE_EXTRA, code);
                 activityLauncher.launch(intent);            }
