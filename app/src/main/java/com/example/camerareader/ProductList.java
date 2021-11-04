@@ -1,20 +1,21 @@
 package com.example.camerareader;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Class to manage product lists
  */
 public class ProductList {
 
-    private ArrayList<Product> lista;
+    private HashMap<Product, Integer> lista;
 
     /**
      * Class initializer
      */
     public ProductList() {
-        lista = new ArrayList<>();
+        lista = new HashMap<>();
     }
 
     /**
@@ -22,40 +23,44 @@ public class ProductList {
      * @param p Product to add
      */
     public void addElement(Product p) {
-        lista.add(p);
+        if (lista.containsKey(p))
+            lista.put(p, lista.get(p) + 1);
+        else lista.put(p, 1);
     }
 
     /**
-     * Remove element by index
-     * @param i index to delete
+     * Remove one element by product
+     * @param p Product to delete
      */
-    public void removeElement(int i) {
-        lista.remove(i);
+    public void removeOneElement(Product p) {
+        if (!lista.containsKey(p)) return;
+        int quantity = lista.get(p);
+        if (quantity > 1) lista.put(p, quantity - 1);
+    }
+
+    /**
+     * Remove all elements by product
+     * @param p Product to delete
+     */
+    public void removeAllElement(Product p) {
+        if (!lista.containsKey(p)) return;
+        lista.remove(p);
     }
 
     /**
      * Get a copy of the list of products
      * @return Copy of the product list
      */
-    public ArrayList<Product> getList() {
-        return new ArrayList<>(lista);
+    public Set<Product> getList() {
+        return lista.keySet();
     }
 
     /**
-     * Get i element of the list
-     * @param i Index of the element to get
-     * @return i-th Product of the list
+     * Get list entryset
+     * @return Entryset of the original list
      */
-    public Product getElement(int i) {
-        return lista.get(i);
-    }
-
-    /**
-     * Get list iterator
-     * @return Iterator of the original list
-     */
-    public Iterator<Product> getIterator() {
-        return lista.iterator();
+    public Set<Map.Entry<Product, Integer>> getEntryset() {
+        return lista.entrySet();
     }
 
     /**
@@ -64,7 +69,7 @@ public class ProductList {
      */
     public double calculateTotal() {
         double total = 0;
-        for (Product p: lista) total += p.getPrice();
+        for (Product p: lista.keySet()) total += (p.getPrice() * lista.get(p));
         return total;
     }
 
@@ -73,6 +78,18 @@ public class ProductList {
      * @return Length of the list
      */
     public int getLength() {
-        return lista.toArray().length;
+        return lista.keySet().toArray().length;
+    }
+
+    /**
+     * Return the total number of elements in the list
+     * @return Number of elements in the list
+     */
+    public int getProductNumber() {
+        int total = 0;
+        for (Product p : lista.keySet()) {
+            total += lista.get(p);
+        }
+        return total;
     }
 }
