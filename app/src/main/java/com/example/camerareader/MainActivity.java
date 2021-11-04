@@ -46,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.listLayout).setVisibility(View.VISIBLE);
             String products="", prices="";
             for (Product p: pList.getList()) {
-                products += p.getName() + '\n';
-                prices += Double.toString(p.getPrice()) + '€' + '\n';
+                int quantity = pList.getQuantity(p);
+                products += ((quantity == 1)? "" : quantity + "x ") + p.getName() + '\n';
+                prices += Double.toString(p.getPrice() * quantity) + '€' + '\n';
             }
             ((TextView)findViewById(R.id.productListNames)).setText(products);
             ((TextView)findViewById(R.id.productListPrices)).setText(prices);

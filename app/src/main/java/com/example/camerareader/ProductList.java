@@ -56,6 +56,15 @@ public class ProductList {
     }
 
     /**
+     * Get Quantity saved of a product
+     * @param p Product to get quantity of
+     * @return Quantity of p
+     */
+    public int getQuantity(Product p) {
+        return lista.get(p);
+    }
+
+    /**
      * Get list entryset
      * @return Entryset of the original list
      */
