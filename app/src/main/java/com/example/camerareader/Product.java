@@ -3,6 +3,7 @@ package com.example.camerareader;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,5 +86,15 @@ public class Product {
      */
     public void setImgBitmap(Bitmap imgBitmap) {
         this.imgBitmap = imgBitmap;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return obj instanceof Product && this.name.equals(((Product) obj).getName());
     }
 }
