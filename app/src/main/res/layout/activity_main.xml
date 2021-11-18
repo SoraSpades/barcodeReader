@@ -101,24 +101,16 @@
             style="@style/Divider"
             class="android.widget.TextView"
             android:id="@+id/secondDivider"
-            android:layout_above="@+id/textView8" />
+            android:layout_above="@+id/totalListButton" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:text="@string/total_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-        <TextView
-            android:id="@+id/totalListTextView"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/totalListButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/money_placeholder"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textStyle="bold"
